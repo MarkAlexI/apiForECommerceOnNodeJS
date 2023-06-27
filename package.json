@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "dev": "npx tsc ./src/app.ts && node ./src/app.js"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
