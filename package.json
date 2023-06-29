@@ -1,4 +1,15 @@
 {
+  "name": "fileStorageOnNodeJS",
+  "version": "1.4.0",
+  "description": "Saving files without database.",
+  "main": "/src/app.js",
+  "keywords": [
+    "storage",
+    "nodejs",
+    "ts"
+  ],
+  "author": "MarkAlexI",
+  "license": "MIT",
   "scripts": {
     "dev": "npx tsc ./src/app.ts && node ./src/app.js"
   },
