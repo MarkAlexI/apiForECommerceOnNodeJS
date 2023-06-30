@@ -21,3 +21,7 @@ function saveUsers() {
     console.log(`Error: ${error}`);
   }
 }
+
+export const findAll = async (): Promise<UnitUser[]> => Object.values(users);
+
+export const findOne = async (id: string): Promise<UnitUser> => users[id];
