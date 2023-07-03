@@ -69,3 +69,16 @@ export const remove = async (id: string): Promise<null | void> => {
 
   saveUsers();
 };
+
+export const findByEmail = async (userEmail: string): Promise<null | UnitUser> => {
+
+  const allUsers = await findAll();
+
+  const getUser = allUsers.find(user => userEmail === user.email);
+
+  if (!getUser) {
+    return null;
+  }
+
+  return getUser;
+};
