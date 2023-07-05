@@ -1,6 +1,6 @@
 import { User, UnitUser, Users } from "./user.interface";
-import fs from "fs";
-import bcrypt from "bcryptjs";
+import * as fs from "fs";
+import * as bcrypt from "bcryptjs";
 import { v4 as random } from "uuid";
 
 let users: Users = loadUsers(); 
@@ -28,7 +28,7 @@ export const findAll = async (): Promise<UnitUser[]> => Object.values(users);
 
 export const findOne = async (id: string): Promise<UnitUser> => users[id];
 
-export const create = async (userData: UnitUser): Promise<>
+export const create = async (userData: UnitUser): Promise<UnitUser | null> => {
 
   let id = random();
 
@@ -41,9 +41,9 @@ export const create = async (userData: UnitUser): Promise<>
 
   const salt = await bcrypt.genSalt(10);
 
-  const hashedPassword = await bcrypt.hash(userData.passwo>
+  const hashedPassword = await bcrypt.hash(userData.password, salt);
 
-  const user: UnitUser = {
+  const user:UnitUser = {
     id: id,
     username: userData.username,
     email: userData.email,

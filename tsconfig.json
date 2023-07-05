@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true
+  },
+  "include": ["./src/app.ts"],
+  "exclude": ["./src/users/*"]
+}
