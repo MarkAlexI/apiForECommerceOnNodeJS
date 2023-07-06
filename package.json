@@ -1,6 +1,6 @@
 {
   "name": "apiForECommerceOnNodeJS",
-  "version": "1.10.0",
+  "version": "1.10.1",
   "description": "REST API for e-commerce without traditional database.",
   "main": "/src/app.js",
   "keywords": [
@@ -12,7 +12,8 @@
   "author": "MarkAlexI",
   "license": "MIT",
   "scripts": {
-    "dev": "npx tsc --project ./tsconfig.json && node ./src/app.js"
+    "compile": "npx tsc --project ./tsconfig.json",
+    "dev": "npm run compile && node ./src/app.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

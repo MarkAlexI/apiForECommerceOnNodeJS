@@ -26,22 +26,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.userRouter = void 0;
 const express_1 = __importDefault(require("express"));
-const dotenv = __importStar(require("dotenv"));
-const cors_1 = __importDefault(require("cors"));
-const helmet_1 = __importDefault(require("helmet"));
-const users_routes_1 = require("./users/users.routes");
-dotenv.config();
-if (!process.env.PORT) {
-    console.log(`No port value specified...`);
-}
-const PORT = parseInt(process.env.PORT, 10);
-const app = (0, express_1.default)();
-app.use(express_1.default.json());
-app.use(express_1.default.urlencoded({ extended: true }));
-app.use((0, cors_1.default)());
-app.use((0, helmet_1.default)());
-app.use('/', users_routes_1.userRouter);
-app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`);
+const http_status_codes_1 = require("http-status-codes");
+const database = __importStar(require("./user.datastorage"));
+exports.userRouter = express_1.default.Router();
+exports.userRouter.get("/users", async (req, res) => {
+    try {
+        const allUsers = await database.findAll();
+        if (!allUsers) {
+            return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({
+                msg: `No users find.`
+            });
+        }
+        return res.status(http_status_codes_1.StatusCodes.OK).json({
+            total_user: allUsers.length,
+            allUsers
+        });
+    }
+    catch (error) {
+        return res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).json({
+            error
+        });
+    }
 });
