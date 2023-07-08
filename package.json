@@ -1,8 +1,8 @@
 {
   "name": "apiForECommerceOnNodeJS",
-  "version": "1.11.2",
+  "version": "1.11.3",
   "description": "REST API for e-commerce without traditional database.",
-  "main": "/src/app.js",
+  "main": "/dist/app.js",
   "keywords": [
     "restapi",
     "filestorage",
@@ -13,7 +13,7 @@
   "license": "MIT",
   "scripts": {
     "compile": "npx tsc --project ./tsconfig.json",
-    "dev": "npm run compile && node ./src/app.js"
+    "dev": "npm run compile && node ./dist/app.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

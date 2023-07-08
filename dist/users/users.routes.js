@@ -50,3 +50,28 @@ exports.userRouter.get("/users", async (req, res) => {
         });
     }
 });
+exports.userRouter.post("/register", async (req, res) => {
+    try {
+        const { username, email, password } = req.body;
+        if (!username || !email || !password) {
+            return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({
+                error: `Please provide all the required parameters...`
+            });
+        }
+        const user = await database.findByEmail(email);
+        if (user) {
+            return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({
+                error: `This email has already been registered...`
+            });
+        }
+        const newUser = await database.create(req.body);
+        return res.status(http_status_codes_1.StatusCodes.CREATED).json({
+            newUser
+        });
+    }
+    catch (error) {
+        return res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).json({
+            error
+        });
+    }
+});
