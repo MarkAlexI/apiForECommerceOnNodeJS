@@ -50,6 +50,24 @@ exports.userRouter.get("/users", async (req, res) => {
         });
     }
 });
+exports.userRouter.get("/user/:id", async (req, res) => {
+    try {
+        const user = await database.findOne(req.params.id);
+        if (!user) {
+            return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({
+                error: `User not found!`
+            });
+        }
+        return res.status(http_status_codes_1.StatusCodes.OK).json({
+            user
+        });
+    }
+    catch (error) {
+        return res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).json({
+            error
+        });
+    }
+});
 exports.userRouter.post("/register", async (req, res) => {
     try {
         const { username, email, password } = req.body;
