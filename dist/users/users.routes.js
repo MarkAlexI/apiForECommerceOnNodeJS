@@ -93,3 +93,23 @@ exports.userRouter.post("/register", async (req, res) => {
         });
     }
 });
+exports.userRouter.delete("/user/:id", async (req, res) => {
+    try {
+        const id = (req.params.id);
+        const user = await database.findOne(id);
+        if (!user) {
+            return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({
+                error: `User does not exist`
+            });
+        }
+        await database.remove(id);
+        return res.status(http_status_codes_1.StatusCodes.OK).json({
+            msg: `User ${id} was deleted.`
+        });
+    }
+    catch (error) {
+        return res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).json({
+            error
+        });
+    }
+});
