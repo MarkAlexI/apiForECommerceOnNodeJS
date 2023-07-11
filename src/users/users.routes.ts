@@ -78,6 +78,43 @@ userRouter.post("/register", async (req: Request, res: Response) => {
   }
 });
 
+userRouter.post("/login", async (req: Request, res: Response) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        error: `Please provide all the required parameters.`
+      });
+    }
+
+    const user = await database.findByEmail(email);
+
+    if (!user) {
+      return res.status(StatusCodes.NOT_FOUND).json({
+        error: `No user exists with the email provided.`
+      });
+    }
+
+    const comparePassword = await database.comparePassword(email, password);
+
+    if (!comparePassword) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        error: `Incorrect Password!`
+      });
+    }
+
+    return res.status(StatusCodes.OK).json({
+      user
+    });
+
+  } catch (error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      error
+    });
+  }
+});
+
 userRouter.delete("/user/:id", async (req: Request, res: Response) => {
   try {
     const id = (req.params.id);
