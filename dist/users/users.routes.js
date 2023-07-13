@@ -123,6 +123,32 @@ exports.userRouter.post("/login", async (req, res) => {
         });
     }
 });
+exports.userRouter.put('/user/:id', async (req, res) => {
+    try {
+        const { username, email, password } = req.body;
+        const getUser = await database.findOne(req.params.id);
+        if (!username || !email || !password) {
+            return res.status(401).json({
+                error: `Please provide all the required parameters.`
+            });
+        }
+        if (!getUser) {
+            return res.status(404).json({
+                error: `No user with id ${req.params.id}`
+            });
+        }
+        const updateUser = await database.update(req.params.id, req.body);
+        return res.status(201).json({
+            updateUser
+        });
+    }
+    catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            error
+        });
+    }
+});
 exports.userRouter.delete("/user/:id", async (req, res) => {
     try {
         const id = (req.params.id);
