@@ -13,3 +13,5 @@ function loadProducts(): Products {
     return {};
   }
 }
+
+export const findAll = async (): Promise<UnitProduct[]> => Object.values(products);
