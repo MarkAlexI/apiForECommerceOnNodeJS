@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.findAll = void 0;
+exports.findOne = exports.findAll = void 0;
 const fs_1 = __importDefault(require("fs"));
 let products = loadProducts();
 function loadProducts() {
@@ -18,3 +18,5 @@ function loadProducts() {
 }
 const findAll = async () => Object.values(products);
 exports.findAll = findAll;
+const findOne = async (id) => products[id];
+exports.findOne = findOne;
