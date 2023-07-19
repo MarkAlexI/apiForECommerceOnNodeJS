@@ -16,6 +16,15 @@ function loadProducts() {
         return {};
     }
 }
+function saveProducts() {
+    try {
+        fs_1.default.writeFileSync("./products.json", JSON.stringify(products), "utf-8");
+        console.log(`Products saved successfully!`);
+    }
+    catch (error) {
+        console.log(`Error: `, error);
+    }
+}
 const findAll = async () => Object.values(products);
 exports.findAll = findAll;
 const findOne = async (id) => products[id];

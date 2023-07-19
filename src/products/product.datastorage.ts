@@ -14,6 +14,15 @@ function loadProducts(): Products {
   }
 }
 
+function saveProducts() {
+  try {
+    fs.writeFileSync("./products.json", JSON.stringify(products), "utf-8");
+    console.log(`Products saved successfully!`);
+  } catch (error) {
+    console.log(`Error: `, error);
+  }
+}
+
 export const findAll = async (): Promise<UnitProduct[]> => Object.values(products);
 
 export const findOne = async (id: string): Promise<UnitProduct> => products[id];
