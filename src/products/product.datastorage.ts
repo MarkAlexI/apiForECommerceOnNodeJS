@@ -47,3 +47,21 @@ export const create = async (productInfo: Product): Promise<null | UnitProduct> 
 
   return products[id]
 };
+
+export const update = async (id: string, updateValues: Product): Promise<UnitProduct | null> => {
+
+  const product = await findOne(id);
+
+  if (!product) {
+    return null;
+  }
+
+  products[id] = {
+    id,
+    ...updateValues
+  };
+
+  saveProducts();
+
+  return products[id];
+};

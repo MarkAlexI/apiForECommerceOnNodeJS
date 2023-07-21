@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.create = exports.findOne = exports.findAll = void 0;
+exports.update = exports.create = exports.findOne = exports.findAll = void 0;
 const uuid_1 = require("uuid");
 const fs_1 = __importDefault(require("fs"));
 let products = loadProducts();
@@ -45,3 +45,16 @@ const create = async (productInfo) => {
     return products[id];
 };
 exports.create = create;
+const update = async (id, updateValues) => {
+    const product = await (0, exports.findOne)(id);
+    if (!product) {
+        return null;
+    }
+    products[id] = {
+        id,
+        ...updateValues
+    };
+    saveProducts();
+    return products[id];
+};
+exports.update = update;
