@@ -25,3 +25,23 @@ productRouter.get('/products', async (req: Request, res: Response) => {
     });
   }
 });
+
+productRouter.post("/product", async (req: Request, res: Response) => {
+  try {
+    const { name, price, quantity, image } = req.body;
+
+    if (!name || !price || !quantity || !image) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        error: `Please provide all the required parameters!`
+      });
+    }
+    const newProduct = await database.create({ ...req.body });
+    return res.status(StatusCodes.CREATED).json({
+      newProduct
+    });
+  } catch (error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      error
+    });
+  }
+});
