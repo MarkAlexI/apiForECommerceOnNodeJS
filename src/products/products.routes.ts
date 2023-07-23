@@ -45,3 +45,29 @@ productRouter.post("/product", async (req: Request, res: Response) => {
     });
   }
 });
+
+productRouter.put("/product/:id", async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+
+    const newProduct = req.body;
+
+    const findProduct = await database.findOne(id);
+
+    if (!findProduct) {
+      return res.status(StatusCodes.NOT_FOUND).json({
+        error: `Product does not exist.`
+      });
+    }
+
+    const updateProduct = await database.update(id, newProduct);
+
+    return res.status(StatusCodes.OK).json({
+      updateProduct
+    });
+  } catch (error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      error
+    });
+  }
+});
