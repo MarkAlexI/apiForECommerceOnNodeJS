@@ -1,6 +1,6 @@
 {
   "name": "apiForECommerceOnNodeJS",
-  "version": "1.24.4",
+  "version": "1.24.5",
   "description": "REST API for e-commerce without traditional database.",
   "main": "/dist/app.js",
   "keywords": [
@@ -15,7 +15,7 @@
     "compile": "npx tsc --project ./tsconfig.json",
     "dev": "npm run compile && node ./dist/app.js",
     "build": "npm run compile",
-    "test": "echo \"Hello! Soon tests will be here!\" && exit 1"
+    "test": "echo \"Hello! Soon tests will be here!\""
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
