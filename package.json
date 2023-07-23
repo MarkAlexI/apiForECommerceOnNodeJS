@@ -13,7 +13,9 @@
   "license": "MIT",
   "scripts": {
     "compile": "npx tsc --project ./tsconfig.json",
-    "dev": "npm run compile && node ./dist/app.js"
+    "dev": "npm run compile && node ./dist/app.js",
+    "build": "npm run compile",
+    "test": "echo \"Hello! Soon tests will be here!\" && exit 1"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
