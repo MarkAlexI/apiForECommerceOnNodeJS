@@ -26,6 +26,26 @@ productRouter.get('/products', async (req: Request, res: Response) => {
   }
 });
 
+productRouter.get("/product/:id", async (req: Request, res: Response) => {
+  try {
+    const product = await database.findOne(req.params.id);
+
+    if (!product) {
+      return res.status(StatusCodes.NOT_FOUND).json({
+        error: `Product does not exist!`
+      });
+    }
+
+    return res.status(StatusCodes.OK).json({
+      product
+    });
+  } catch (error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      error
+    });
+  }
+});
+
 productRouter.post("/product", async (req: Request, res: Response) => {
   try {
     const { name, price, quantity, image } = req.body;

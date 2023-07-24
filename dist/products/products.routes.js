@@ -50,6 +50,24 @@ exports.productRouter.get('/products', async (req, res) => {
         });
     }
 });
+exports.productRouter.get("/product/:id", async (req, res) => {
+    try {
+        const product = await database.findOne(req.params.id);
+        if (!product) {
+            return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({
+                error: `Product does not exist!`
+            });
+        }
+        return res.status(http_status_codes_1.StatusCodes.OK).json({
+            product
+        });
+    }
+    catch (error) {
+        return res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).json({
+            error
+        });
+    }
+});
 exports.productRouter.post("/product", async (req, res) => {
     try {
         const { name, price, quantity, image } = req.body;
