@@ -65,3 +65,16 @@ export const update = async (id: string, updateValues: Product): Promise<UnitPro
 
   return products[id];
 };
+
+export const remove = async (id: string): Promise<null | void> => {
+
+  const product = await findOne(id);
+
+  if (!product) {
+    return null;
+  }
+
+  delete products[id];
+
+  saveProducts();
+};
