@@ -91,3 +91,26 @@ productRouter.put("/product/:id", async (req: Request, res: Response) => {
     });
   }
 });
+
+productRouter.delete("/product/:id", async (req: Request, res: Response) => {
+  try {
+    const getProduct = await database.findOne(req.params.id);
+
+    if (!getProduct) {
+      return res.status(StatusCodes.NOT_FOUND).json({
+        error: `No product with ID ${req.params.id}.`
+      });
+    }
+
+    await database.remove(req.params.id)
+
+    return res.status(StatusCodes.OK).json({
+      msg: `Product deleted.`
+    });
+
+  } catch (error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      error
+    });
+  }
+});
