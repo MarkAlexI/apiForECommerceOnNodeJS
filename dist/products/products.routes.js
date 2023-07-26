@@ -108,3 +108,22 @@ exports.productRouter.put("/product/:id", async (req, res) => {
         });
     }
 });
+exports.productRouter.delete("/product/:id", async (req, res) => {
+    try {
+        const getProduct = await database.findOne(req.params.id);
+        if (!getProduct) {
+            return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({
+                error: `No product with ID ${req.params.id}.`
+            });
+        }
+        await database.remove(req.params.id);
+        return res.status(http_status_codes_1.StatusCodes.OK).json({
+            msg: `Product deleted.`
+        });
+    }
+    catch (error) {
+        return res.status(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR).json({
+            error
+        });
+    }
+});
