@@ -15,7 +15,7 @@
     "compile": "npx tsc --project ./tsconfig.json",
     "dev": "npm run compile && node ./dist/app.js",
     "build": "npm run compile",
-    "test": "echo \"Hello! Soon tests will be here!\""
+    "test": "echo \"Hello! First test now here!\" && mocha"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -34,6 +34,9 @@
     "@types/helmet": "^4.0.0",
     "@types/http-status-codes": "^1.2.0",
     "@types/uuid": "^9.0.2",
+    "expect": "^29.6.1",
+    "mocha": "^10.2.0",
+    "supertest": "^6.3.3",
     "typescript": "^5.1.3"
   }
 }
