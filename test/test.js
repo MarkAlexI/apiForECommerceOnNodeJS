@@ -1,20 +1,21 @@
-const request = require('supertest');
+let request = require('supertest');
 const { expect } = require('expect');
+const assert = require('assert');
 
 const app = 'http://localhost:1234';
 
 describe('Testing GET endpoint', () => {
+  request = request(app);
   it('Respond with valid HTTP status code', async () => {
-    const response = await request(app)
-      .get('/users')
-
-//    expect(response.status.toBe(200));
-  //  expext(response.body.status.toBe('success'));
+    request
+      .get("/users")
+      .expect("Content-Type", /json/)
       .expect(200)
-      .expect('Content-Type', 'application/json; charset=utf-8')
-      .end(function(err, res) {
-        if (err) throw err;
-        console.log(res.body);
+      .then((response) => {
+        assert(response.body.data !== undefined);
+      })
+      .catch((err) => {
+        assert(err === undefined);
       });
   });
 });

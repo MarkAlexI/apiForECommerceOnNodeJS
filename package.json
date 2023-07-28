@@ -1,6 +1,6 @@
 {
   "name": "apiForECommerceOnNodeJS",
-  "version": "1.27.5",
+  "version": "1.27.6",
   "description": "REST API for e-commerce without traditional database.",
   "main": "/dist/app.js",
   "keywords": [
@@ -34,6 +34,7 @@
     "@types/helmet": "^4.0.0",
     "@types/http-status-codes": "^1.2.0",
     "@types/uuid": "^9.0.2",
+    "assert": "^2.0.0",
     "expect": "^29.6.1",
     "mocha": "^10.2.0",
     "supertest": "^6.3.3",
