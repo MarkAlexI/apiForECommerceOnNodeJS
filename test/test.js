@@ -32,3 +32,26 @@ describe('Testing GET endpoint', () => {
       });
   });
 });
+
+describe('Testing POST endpoint', () => {
+  const payload = {
+    "name": "Rat",
+    "price": 500,
+    "quantity": 35,
+    "image": "vfd57hs,g"
+  };
+
+  it('Respond with valid HTTP status code from /product', async () => {
+    request
+      .post('/product')
+      .send(payload)
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then((response) => {
+        assert(response.body.data !== undefined);
+      })
+      .catch((err) => {
+        assert(err === undefined);
+      });
+  });
+});
