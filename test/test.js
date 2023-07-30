@@ -35,10 +35,10 @@ describe('Testing GET endpoint', () => {
 
 describe('Testing POST endpoint', () => {
   const payload = {
-    "name": "Rat",
-    "price": 500,
-    "quantity": 35,
-    "image": "vfd57hs,g"
+    "name": "Cat",
+    "price": 50,
+    "quantity": 5,
+    "image": "h6fg,g7"
   };
 
   it('Respond with valid HTTP status code from /product', async () => {
@@ -52,6 +52,26 @@ describe('Testing POST endpoint', () => {
       })
       .catch((err) => {
         assert(err === undefined);
+      });
+  });
+});
+
+describe('Testing PUT endpoint', () => {
+  const payload = {
+    "quantity": 10
+  };
+
+  it('Respond with valid HTTP status code', () => {
+    request
+      .put('/product/6b8472b3-abed-40dd-9c5d-ddf0e5c2d3c8')
+      .send(payload)
+      .expect(200)
+      .end((err, res) => {
+        if (err) {
+          console.error('Error PUT-request: ', err);
+        } else {
+          console.log('Successful PUT-request: ', res.body);
+        }
       });
   });
 });
