@@ -58,7 +58,10 @@ describe('Testing POST endpoint', () => {
 
 describe('Testing PUT endpoint', () => {
   const payload = {
-    "quantity": 10
+    "name": "Qwerty",
+    "price": 2,
+    "quantity": 100,
+    "image": "dff/hhhj.njg"
   };
 
   it('Respond with valid HTTP status code', () => {
@@ -71,6 +74,22 @@ describe('Testing PUT endpoint', () => {
           console.error('Error PUT-request: ', err);
         } else {
           console.log('Successful PUT-request: ', res.body);
+        }
+      });
+  });
+});
+
+describe('Testing DELETE endpoint', () => {
+  const userId = '6b8472b3-abed-40dd-9c5d-ddf0e5c2d3c8';
+
+  it('Have respond from server', () => {
+    request
+      .delete(`/product/${userId}`)
+      .end((err, res) => {
+        if (err) {
+          console.error('Error DELETE-request: ', err);
+        } else {
+          console.log('Successful DELETE-request: ', res.body);
         }
       });
   });
